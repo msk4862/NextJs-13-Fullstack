@@ -8,38 +8,35 @@ import clsx from 'clsx'
 const icons = { Settings, User, Grid, Calendar }
 
 export type SideBarLink = {
-    label: string
-    link: string
-    icon: keyof typeof icons
+  label: string
+  link: string
+  icon: keyof typeof icons
 }
 
 type SideBarLinkProps = {
-    link: SideBarLink
+  link: SideBarLink
 }
 
 const SidebarLink = ({ link }: SideBarLinkProps) => {
-    const pathname = usePathname()
+  const pathname = usePathname()
 
-    /**
-     * we can't dircetly pass Icon Component from a server component to client,
-     * as a Component is a function and functions 'can not be sent over a network',
-     * they are not serializable just like a Date object, or a reccursive object
-     */
-    const Icon = icons[link.icon]
-    return (
-        <Link
-            href={link.link}
-            className="w-full flex justify-center items-center"
-        >
-            <Icon
-                size={40}
-                className={clsx(
-                    'stroke-gray-400 hover:stroke-violet-600 transition duration-200 ease-in-out',
-                    pathname === link.link && 'stroke-violet-600'
-                )}
-            />
-        </Link>
-    )
+  /**
+   * we can't dircetly pass Icon Component from a server component to client,
+   * as a Component is a function and functions 'can not be sent over a network',
+   * they are not serializable just like a Date object, or a reccursive object
+   */
+  const Icon = icons[link.icon]
+  return (
+    <Link href={link.link} className="w-full flex justify-center items-center">
+      <Icon
+        size={40}
+        className={clsx(
+          'stroke-gray-400 hover:stroke-violet-600 transition duration-200 ease-in-out',
+          pathname === link.link && 'stroke-violet-600'
+        )}
+      />
+    </Link>
+  )
 }
 
 export default SidebarLink
