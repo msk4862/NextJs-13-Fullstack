@@ -3,25 +3,6 @@ import { SignJWT, jwtVerify } from 'jose'
 import { User } from '@prisma/client'
 
 import { db } from './db'
-import { fetcher } from './api'
-
-export const register = async (user) => {
-  return fetcher({
-    url: '/api/register',
-    method: 'POST',
-    body: user,
-    json: false,
-  })
-}
-
-export const signin = async (user) => {
-  return fetcher({
-    url: '/api/signin',
-    method: 'POST',
-    body: user,
-    json: false,
-  })
-}
 
 export const hashPassword = (password: string) => bcrypt.hash(password, 10)
 

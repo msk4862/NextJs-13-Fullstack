@@ -21,9 +21,11 @@ export default async function signin(
     }
 
     const isUser = await comparePasswords(req.body.password, user.password)
-    const cookieName = process.env.COOKIE_NAME
+
+    console.log(isUser)
 
     if (isUser) {
+      const cookieName = process.env.COOKIE_NAME
       if (cookieName) {
         const jwt = await createJWT(user)
         res.setHeader(

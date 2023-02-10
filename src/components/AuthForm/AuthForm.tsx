@@ -1,14 +1,18 @@
 'use client'
 
-import { ChangeEvent, useCallback } from 'react'
+import { ChangeEvent, FormEvent, useCallback } from 'react'
 import Link from 'next/link'
+import { useRouter } from 'next/navigation'
 
 import { Button } from '@components/Button'
 import { Card } from '@components/Card'
 import { Input } from '@components/Input'
+import { register, signin } from '@lib/api'
 
-import { AuthFormModes, RegisterContent, SigninContent } from './constants'
 import { useAuthFormReducer } from './useAuthFormReducer'
+import { useFormValidation } from './useFormValidation'
+import { AuthFormModes, RegisterContent, SigninContent } from './constants'
+import { ErrorLabel } from './ErrorLabel'
 
 type AuthFormProps = {
   mode: keyof typeof AuthFormModes
@@ -17,8 +21,38 @@ type AuthFormProps = {
 export const AuthForm = ({ mode }: AuthFormProps) => {
   const { formState, setFormState } = useAuthFormReducer()
 
-  const content =
-    mode === AuthFormModes.register ? RegisterContent : SigninContent
+  const isRegisterMode = mode === AuthFormModes.register
+  const { formError, setFormError, isFormDataValid } = useFormValidation(
+    formState,
+    isRegisterMode
+  )
+
+  const router = useRouter()
+
+  const content = isRegisterMode ? RegisterContent : SigninContent
+
+  const handleSubmit = useCallback(
+    async (e: FormEvent<HTMLFormElement>) => {
+      e.preventDefault()
+
+      try {
+        if (isFormDataValid()) {
+          if (isRegisterMode) {
+            await register(formState)
+          } else {
+            await signin(formState)
+          }
+        }
+
+        router.replace('/home')
+      } catch (e) {
+        console.error(e)
+        setFormError({ generic: `Could not ${mode}` })
+      } finally {
+      }
+    },
+    [isFormDataValid, formState, isRegisterMode, mode, setFormError, router]
+  )
 
   const onInputChange = useCallback(
     (e: ChangeEvent<HTMLInputElement>) => {
@@ -33,8 +67,12 @@ export const AuthForm = ({ mode }: AuthFormProps) => {
         <div className="text-center">
           <h2 className="text-3xl mb-2">{content.header}</h2>
           <p className="tex-lg text-black/25">{content.subheader}</p>
+          <ErrorLabel
+            className="justify-center text-base ml-0"
+            label={formError.generic}
+          />
         </div>
-        <form className="py-10 w-full">
+        <form onSubmit={handleSubmit} className="pb-10 pt-5 w-full">
           {mode === AuthFormModes.register && (
             <div className="flex mb-8 justify-between">
               <div className="pr-2">
@@ -42,43 +80,41 @@ export const AuthForm = ({ mode }: AuthFormProps) => {
                   First Name
                 </div>
                 <Input
-                  required
                   name="firstName"
                   placeholder="First Name"
                   value={formState.firstName}
                   className="border-solid border-gray border-2 px-6 py-2 text-lg rounded-3xl w-full"
                   onChange={onInputChange}
                 />
+                <ErrorLabel label={formError.firstName} />
               </div>
               <div className="pl-2">
                 <div className="text-lg mb-4 ml-2 text-black/50">Last Name</div>
                 <Input
-                  required
                   name="lastName"
                   placeholder="Last Name"
                   value={formState.lastName}
                   className="border-solid border-gray border-2 px-6 py-2 text-lg rounded-3xl w-full"
                   onChange={onInputChange}
                 />
+                <ErrorLabel label={formError.lastName} />
               </div>
             </div>
           )}
           <div className="mb-8">
             <div className="text-lg mb-4 ml-2 text-black/50">Email</div>
             <Input
-              required
               name="email"
-              type="email"
               placeholder="Email"
               value={formState.email}
               className="border-solid border-gray border-2 px-6 py-2 text-lg rounded-3xl w-full"
               onChange={onInputChange}
             />
+            <ErrorLabel label={formError.email} />
           </div>
           <div className="mb-8">
             <div className="text-lg mb-4 ml-2 text-black/50">Password</div>
             <Input
-              required
               name="password"
               value={formState.password}
               type="password"
@@ -86,6 +122,7 @@ export const AuthForm = ({ mode }: AuthFormProps) => {
               className="border-solid border-gray border-2 px-6 py-2 text-lg rounded-3xl w-full"
               onChange={onInputChange}
             />
+            <ErrorLabel label={formError.password} />
           </div>
           <div className="flex items-center justify-between">
             <div>

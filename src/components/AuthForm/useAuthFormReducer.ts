@@ -1,19 +1,23 @@
 import { useReducer } from 'react'
 
-type FormState = {
+export type FormState = {
   firstName: string
   lastName: string
   email: string
   password: string
 }
-const intialState: FormState = {
+
+export const formDataIntialState: FormState = {
   firstName: '',
   lastName: '',
   email: '',
   password: '',
 }
 
-const reducer = (initialState: FormState, updatedState: Partial<FormState>) => {
+const formDataReducer = (
+  initialState: FormState,
+  updatedState: Partial<FormState>
+) => {
   return {
     ...initialState,
     ...updatedState,
@@ -21,7 +25,11 @@ const reducer = (initialState: FormState, updatedState: Partial<FormState>) => {
 }
 
 export const useAuthFormReducer = () => {
-  const [formState, setFormState] = useReducer(reducer, intialState)
+  const [formState, setFormState] = useReducer(
+    formDataReducer,
+    formDataIntialState
+  )
+
   return {
     formState,
     setFormState,
