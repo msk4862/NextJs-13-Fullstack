@@ -1,3 +1,5 @@
-export default function Register() {
-  return <div>Register</div>
+import { AuthForm } from '@components/AuthForm'
+
+export default function SignIn() {
+  return <AuthForm mode="register" />
 }

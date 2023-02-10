@@ -5,7 +5,7 @@ type InputProps = {
   className?: string
 } & InputHTMLAttributes<HTMLInputElement>
 
-const Input = ({ className, ...props }: InputProps) => {
+export const Input = ({ className, ...props }: InputProps) => {
   return (
     <input
       className={clsx(
@@ -16,5 +16,3 @@ const Input = ({ className, ...props }: InputProps) => {
     />
   )
 }
-
-export default Input
