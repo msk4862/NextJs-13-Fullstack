@@ -1,4 +1,5 @@
 import { PropsWithChildren } from 'react'
+import clsx from 'clsx'
 import { Inter } from '@next/font/google'
 
 import { GlassPane } from '@components/GlassPain'
@@ -13,7 +14,7 @@ const inter = Inter({
 
 export default function DashboardRootLayout({ children }: PropsWithChildren) {
     return (
-        <html lang="en" className={inter.variable}>
+        <html lang="en" className={clsx(inter.variable, 'dark')}>
             <head />
             <body className="h-screen w-screen rainbow-mesh p-6">
                 <GlassPane className="w-full h-full p-6 flex align-center container mx-auto">
