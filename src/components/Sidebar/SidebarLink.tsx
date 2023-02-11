@@ -13,11 +13,11 @@ export type SideBarLink = {
   icon: keyof typeof icons;
 };
 
-type SideBarLinkProps = {
+const SidebarLink = ({
+  link: { label, link, icon },
+}: {
   link: SideBarLink;
-};
-
-const SidebarLink = ({ link }: SideBarLinkProps) => {
+}) => {
   const pathname = usePathname();
 
   /**
@@ -25,14 +25,14 @@ const SidebarLink = ({ link }: SideBarLinkProps) => {
    * as a Component is a function and functions 'can not be sent over a network',
    * they are not serializable just like a Date object, or a reccursive object
    */
-  const Icon = icons[link.icon];
+  const Icon = icons[icon];
   return (
-    <Link href={link.link} className='w-full flex justify-center items-center'>
+    <Link href={link} className='w-full flex justify-center items-center'>
       <Icon
         size={40}
         className={clsx(
           'stroke-gray-400 hover:stroke-violet-600 transition duration-200 ease-in-out',
-          pathname === link.link && 'stroke-violet-600'
+          pathname === link && 'stroke-violet-600'
         )}
       />
     </Link>
