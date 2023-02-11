@@ -1,16 +1,19 @@
 import clsx from 'clsx'
+import { cookies } from 'next/headers'
 import { TASK_STATUS } from '@prisma/client'
 
 import { Card } from '@components/Card'
 import { delay, formatDate } from '@lib/utils'
 import { db } from '@lib/db'
+import { getUserFromCookie } from '@lib/auth'
 
 const getProject = async (projectId: string) => {
   // simulating different load time of different project data
   await delay(Math.random() * 2000)
 
-  const project = await db.project.findUnique({
-    where: { id: projectId },
+  const user = await getUserFromCookie(cookies())
+  const project = await db.project.findFirst({
+    where: { id: projectId, ownerId: user?.id },
     include: { tasks: true },
   })
 

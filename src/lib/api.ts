@@ -1,9 +1,14 @@
 import { Prisma } from '@prisma/client'
 
+type APIRequestBody =
+  | Prisma.UserCreateInput
+  | Prisma.UserWhereUniqueInput
+  | Partial<Prisma.ProjectCreateInput>
+
 type FetcherParams = {
   url: string
   method: 'POST' | 'GET'
-  body: Object
+  body: APIRequestBody
   json?: boolean
 }
 
@@ -46,5 +51,16 @@ export const signin = async (user: Prisma.UserWhereUniqueInput) => {
     method: 'POST',
     body: user,
     json: false,
+  })
+}
+
+export const createNewProject = async (
+  projectData: Partial<Prisma.ProjectCreateInput>
+) => {
+  return fetcher({
+    url: 'api/project',
+    method: 'POST',
+    body: projectData,
+    json: true,
   })
 }

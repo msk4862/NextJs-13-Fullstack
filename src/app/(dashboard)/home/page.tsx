@@ -1,10 +1,12 @@
 import { Suspense } from 'react'
 
 import { Greeting, GreetingsSkeleton } from '@components/Greeting'
-import { ProjectList, ProjectListLoader } from '@components/Project'
-import { getUserFromCookie } from '@lib/auth'
-import { db } from '@lib/db'
-import { delay } from '@lib/utils'
+import {
+  ProjectList,
+  ProjectListLoader,
+  CreateProject,
+} from '@components/Project'
+import { TaskCard } from '@components/TaskCard'
 
 export default function Page() {
   return (
@@ -21,10 +23,17 @@ export default function Page() {
             {/* @ts-expect-error */}
             <ProjectList />
           </Suspense>
-          <div className="w-1/3 p-3">{/* new project here */}</div>
+          <div className="w-1/3 p-3">
+            <CreateProject />
+          </div>
         </div>
         <div className="mt-6 flex-2 grow w-full flex">
-          <div className="w-full">{/* tasks here */}</div>
+          <div className="w-full">
+            <Suspense fallback={<ProjectListLoader />}>
+              {/* @ts-expect-error */}
+              <TaskCard title="Due date is near" />
+            </Suspense>
+          </div>
         </div>
       </div>
     </div>
