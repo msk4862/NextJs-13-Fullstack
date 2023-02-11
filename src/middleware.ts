@@ -24,29 +24,41 @@ export default async function middleware(req: NextRequest) {
     pathname.startsWith('/_next') ||
     pathname.startsWith('/api') ||
     pathname.startsWith('/static') ||
-    pathname.startsWith('/signin') ||
-    pathname.startsWith('/register') ||
     PUBLIC_FILE.test(pathname)
   ) {
     return NextResponse.next();
   }
+  // Check if already signed in
+  else if (pathname.startsWith('/signin') || pathname.startsWith('/register')) {
+    console.log('asas');
 
-  const cookieName = COOKIE_NAME;
-  if (cookieName) {
-    const jwt = req.cookies.get(cookieName);
-
+    const jwt = req.cookies.get(COOKIE_NAME);
     if (!jwt) {
-      req.nextUrl.pathname = '/signin';
-      return NextResponse.redirect(req.nextUrl);
-    }
-
-    try {
-      await verifyJWT(jwt.value);
       return NextResponse.next();
+    }
+    try {
+      // already signed in -> redirect to /home page
+      await verifyJWT(jwt.value);
+      req.nextUrl.pathname = '/home';
+      return NextResponse.redirect(req.nextUrl);
     } catch (e) {
       console.error(e);
-      req.nextUrl.pathname = '/signin';
-      return NextResponse.redirect(req.nextUrl);
+      return NextResponse.next();
     }
+  }
+
+  const jwt = req.cookies.get(COOKIE_NAME);
+  if (!jwt) {
+    req.nextUrl.pathname = '/signin';
+    return NextResponse.redirect(req.nextUrl);
+  }
+
+  try {
+    await verifyJWT(jwt.value);
+    return NextResponse.next();
+  } catch (e) {
+    console.error(e);
+    req.nextUrl.pathname = '/signin';
+    return NextResponse.redirect(req.nextUrl);
   }
 }

@@ -5,6 +5,11 @@ import { User } from '@prisma/client';
 import { db } from './db';
 import { COOKIE_NAME, JWT_SECRET } from './environments';
 
+type JWTData = {
+  id: string;
+  email: string;
+};
+
 export const hashPassword = (password: string) => bcrypt.hash(password, 10);
 
 export const comparePasswords = (
@@ -24,16 +29,16 @@ export const createJWT = (user: User) => {
     .sign(new TextEncoder().encode(JWT_SECRET));
 };
 
-export const validateJWT = async (jwt: string) => {
+export const validateJWT = async (jwt: string): Promise<JWTData> => {
   const { payload } = await jwtVerify(
     jwt,
     new TextEncoder().encode(JWT_SECRET)
   );
 
-  return payload.payload as any;
+  return payload.payload as JWTData;
 };
 
-export const getUserFromCookie = async (cookies) => {
+export const getUserFromCookie = async (cookies: any) => {
   const jwt = cookies.get(COOKIE_NAME);
 
   const { id } = await validateJWT(jwt.value);
@@ -41,7 +46,7 @@ export const getUserFromCookie = async (cookies) => {
   // check if user is in DB a well
   const user = await db.user.findUnique({
     where: {
-      id: id as string,
+      id,
     },
   });
 
