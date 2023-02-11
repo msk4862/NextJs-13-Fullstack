@@ -1,3 +1,5 @@
+import { Prisma } from '@prisma/client'
+
 type FetcherParams = {
   url: string
   method: 'POST' | 'GET'
@@ -29,7 +31,7 @@ export const fetcher = async ({
   }
 }
 
-export const register = async (user) => {
+export const register = async (user: Prisma.UserCreateInput) => {
   return fetcher({
     url: '/api/register',
     method: 'POST',
@@ -38,7 +40,7 @@ export const register = async (user) => {
   })
 }
 
-export const signin = async (user) => {
+export const signin = async (user: Prisma.UserWhereUniqueInput) => {
   return fetcher({
     url: '/api/signin',
     method: 'POST',
