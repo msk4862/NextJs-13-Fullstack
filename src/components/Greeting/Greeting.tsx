@@ -2,7 +2,7 @@ import { cookies } from 'next/headers'
 
 import { Button } from '@components/Button'
 import { Card } from '@components/Card'
-import { delay } from '@lib/async'
+import { delay } from '@lib/utils'
 import { getUserFromCookie } from '@lib/auth'
 
 const getUserDetails = async () => {

@@ -30,7 +30,7 @@ export const Button = ({
   return (
     <button
       className={clsx(
-        'rounded-3xl font-bold hover:scale-110 active:scale-100 transition duration-200 ease-in-out',
+        'rounded-3xl font-bold transition duration-200 ease-in-out',
         variants[variant],
         sizes[size],
         className
