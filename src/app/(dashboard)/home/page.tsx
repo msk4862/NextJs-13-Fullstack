@@ -18,12 +18,12 @@ export default function Page() {
             <Greeting />
           </Suspense>
         </div>
-        <div className='w-full flex flex-2 grow items-center flex-wrap mt-3'>
+        <div className='w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 flex-wrap mt-3'>
           <Suspense fallback={<ProjectListLoader />}>
             {/* @ts-expect-error */}
             <ProjectList />
           </Suspense>
-          <div className='w-1/3 p-3'>
+          <div className='p-3'>
             <CreateProject />
           </div>
         </div>

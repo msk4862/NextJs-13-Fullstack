@@ -11,7 +11,7 @@ export const ProjectList = async () => {
 
   return projectIds.map(({ id }) => {
     return (
-      <div key={id} className='w-1/3 p-3'>
+      <div key={id} className='p-3'>
         <Link href={`project/${id}`}>
           <Suspense fallback={<ProjectCardSkeleten />}>
             {/* @ts-expect-error */}
