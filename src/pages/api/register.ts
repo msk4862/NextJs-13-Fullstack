@@ -3,7 +3,7 @@ import { serialize } from 'cookie';
 
 import { db } from '@lib/db';
 import { createJWT, hashPassword } from '@lib/auth';
-import { COOKIE_NAME } from '@lib/environments';
+import { JWT_COOKIE_NAME } from '@lib/environments';
 
 type Data = {
   status: boolean;
@@ -27,7 +27,7 @@ export default async function register(
     const jwt = await createJWT(user);
     res.setHeader(
       'Set-Cookie',
-      serialize(COOKIE_NAME, jwt, {
+      serialize(JWT_COOKIE_NAME, jwt, {
         httpOnly: true,
         path: '/',
         maxAge: 60 * 60 * 24 * 7,

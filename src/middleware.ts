@@ -2,7 +2,7 @@
 import { NextResponse } from 'next/server';
 import { jwtVerify } from 'jose';
 import type { NextRequest } from 'next/server';
-import { COOKIE_NAME, JWT_SECRET } from '@lib/environments';
+import { JWT_COOKIE_NAME, JWT_SECRET } from '@lib/environments';
 
 const PUBLIC_FILE = /\.(.*)$/;
 
@@ -32,7 +32,7 @@ export default async function middleware(req: NextRequest) {
   else if (pathname.startsWith('/signin') || pathname.startsWith('/register')) {
     console.log('asas');
 
-    const jwt = req.cookies.get(COOKIE_NAME);
+    const jwt = req.cookies.get(JWT_COOKIE_NAME);
     if (!jwt) {
       return NextResponse.next();
     }
@@ -47,7 +47,7 @@ export default async function middleware(req: NextRequest) {
     }
   }
 
-  const jwt = req.cookies.get(COOKIE_NAME);
+  const jwt = req.cookies.get(JWT_COOKIE_NAME);
   if (!jwt) {
     req.nextUrl.pathname = '/signin';
     return NextResponse.redirect(req.nextUrl);

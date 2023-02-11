@@ -3,7 +3,7 @@ import { SignJWT, jwtVerify } from 'jose';
 import { User } from '@prisma/client';
 
 import { db } from './db';
-import { COOKIE_NAME, JWT_SECRET } from './environments';
+import { JWT_COOKIE_NAME, JWT_SECRET } from './environments';
 
 type JWTData = {
   id: string;
@@ -39,7 +39,7 @@ export const validateJWT = async (jwt: string): Promise<JWTData> => {
 };
 
 export const getUserFromCookie = async (cookies: any) => {
-  const jwt = cookies.get(COOKIE_NAME);
+  const jwt = cookies.get(JWT_COOKIE_NAME);
 
   const { id } = await validateJWT(jwt.value);
 

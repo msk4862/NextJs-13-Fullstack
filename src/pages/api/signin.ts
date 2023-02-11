@@ -3,7 +3,7 @@ import { serialize } from 'cookie';
 
 import { db } from '@lib/db';
 import { comparePasswords, createJWT } from '@lib/auth';
-import { COOKIE_NAME } from '@lib/environments';
+import { JWT_COOKIE_NAME } from '@lib/environments';
 
 export default async function signin(
   req: NextApiRequest,
@@ -30,7 +30,7 @@ export default async function signin(
     // set JWT token in cookie which will be used for authorisation in future requests
     res.setHeader(
       'Set-Cookie',
-      serialize(COOKIE_NAME, jwt, {
+      serialize(JWT_COOKIE_NAME, jwt, {
         httpOnly: true,
         path: '/',
         maxAge: 60 * 60 * 24 * 7,
