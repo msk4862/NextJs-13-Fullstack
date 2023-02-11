@@ -3,6 +3,7 @@ import { serialize } from 'cookie';
 
 import { db } from '@lib/db';
 import { comparePasswords, createJWT } from '@lib/auth';
+import { COOKIE_NAME } from '@lib/environments';
 
 export default async function signin(
   req: NextApiRequest,
@@ -21,26 +22,22 @@ export default async function signin(
     }
 
     const isUser = await comparePasswords(req.body.password, user.password);
-
-    console.log(isUser);
-
-    if (isUser) {
-      const cookieName = process.env.COOKIE_NAME;
-      if (cookieName) {
-        const jwt = await createJWT(user);
-        res.setHeader(
-          'Set-Cookie',
-          serialize(cookieName, jwt, {
-            httpOnly: true,
-            path: '/',
-            maxAge: 60 * 60 * 24 * 7,
-          })
-        );
-      }
-      res.status(200).end();
-    } else {
+    if (!isUser) {
       res.status(401).json({ error: 'Invalid login' });
     }
+
+    const jwt = await createJWT(user);
+    // set JWT token in cookie which will be used for authorisation in future requests
+    res.setHeader(
+      'Set-Cookie',
+      serialize(COOKIE_NAME, jwt, {
+        httpOnly: true,
+        path: '/',
+        maxAge: 60 * 60 * 24 * 7,
+      })
+    );
+
+    res.status(200).end();
   } else {
     res.status(402).end();
   }

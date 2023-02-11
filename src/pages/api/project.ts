@@ -1,14 +1,13 @@
 import { validateJWT } from '@lib/auth';
 import { db } from '@lib/db';
+import { COOKIE_NAME } from '@lib/environments';
 import { NextApiRequest, NextApiResponse } from 'next';
 
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  const cookieName = process.env.COOKIE_NAME ?? '';
-  const user = await validateJWT(req.cookies[cookieName] || '');
-
+  const user = await validateJWT(req.cookies[COOKIE_NAME] || '');
   if (!user) {
     res.status(400).json({ status: false });
   }

@@ -3,7 +3,7 @@ import { serialize } from 'cookie';
 
 import { db } from '@lib/db';
 import { createJWT, hashPassword } from '@lib/auth';
-import { User, PrismaClient } from '@prisma/client';
+import { COOKIE_NAME } from '@lib/environments';
 
 type Data = {
   status: boolean;
@@ -23,19 +23,16 @@ export default async function register(
       },
     });
 
+    // set JWT token in cookie which will be used for authorisation in future requests
     const jwt = await createJWT(user);
-    const cookieName = process.env.COOKIE_NAME;
-
-    if (cookieName) {
-      res.setHeader(
-        'Set-Cookie',
-        serialize(cookieName, jwt, {
-          httpOnly: true,
-          path: '/',
-          maxAge: 60 * 60 * 24 * 7,
-        })
-      );
-    }
+    res.setHeader(
+      'Set-Cookie',
+      serialize(COOKIE_NAME, jwt, {
+        httpOnly: true,
+        path: '/',
+        maxAge: 60 * 60 * 24 * 7,
+      })
+    );
 
     res.status(201).json({ status: true });
   }

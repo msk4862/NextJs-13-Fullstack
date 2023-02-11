@@ -2,6 +2,7 @@
 import { NextResponse } from 'next/server';
 import { jwtVerify } from 'jose';
 import type { NextRequest } from 'next/server';
+import { COOKIE_NAME, JWT_SECRET } from '@lib/environments';
 
 const PUBLIC_FILE = /\.(.*)$/;
 
@@ -9,7 +10,7 @@ const PUBLIC_FILE = /\.(.*)$/;
 const verifyJWT = async (jwt: string) => {
   const { payload } = await jwtVerify(
     jwt,
-    new TextEncoder().encode(process.env.JWT_SECRET)
+    new TextEncoder().encode(JWT_SECRET)
   );
 
   return payload;
@@ -30,7 +31,7 @@ export default async function middleware(req: NextRequest) {
     return NextResponse.next();
   }
 
-  const cookieName = process.env.COOKIE_NAME;
+  const cookieName = COOKIE_NAME;
   if (cookieName) {
     const jwt = req.cookies.get(cookieName);
 

@@ -3,6 +3,7 @@ import { SignJWT, jwtVerify } from 'jose';
 import { User } from '@prisma/client';
 
 import { db } from './db';
+import { COOKIE_NAME, JWT_SECRET } from './environments';
 
 export const hashPassword = (password: string) => bcrypt.hash(password, 10);
 
@@ -20,20 +21,20 @@ export const createJWT = (user: User) => {
     .setExpirationTime(exp)
     .setIssuedAt(iat)
     .setNotBefore(iat)
-    .sign(new TextEncoder().encode(process.env.JWT_SECRET));
+    .sign(new TextEncoder().encode(JWT_SECRET));
 };
 
 export const validateJWT = async (jwt: string) => {
   const { payload } = await jwtVerify(
     jwt,
-    new TextEncoder().encode(process.env.JWT_SECRET)
+    new TextEncoder().encode(JWT_SECRET)
   );
 
   return payload.payload as any;
 };
 
 export const getUserFromCookie = async (cookies) => {
-  const jwt = cookies.get(process.env.COOKIE_NAME);
+  const jwt = cookies.get(COOKIE_NAME);
 
   const { id } = await validateJWT(jwt.value);
 
