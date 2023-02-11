@@ -8,7 +8,7 @@ type APIRequestBody =
 type FetcherParams = {
   url: string;
   method: 'POST' | 'GET';
-  body: APIRequestBody;
+  body?: APIRequestBody;
   json?: boolean;
 };
 
@@ -54,6 +54,14 @@ export const signin = async (user: Prisma.UserWhereUniqueInput) => {
   });
 };
 
+export const signout = async () => {
+  return fetcher({
+    url: '/api/signout',
+    method: 'POST',
+    json: false,
+  });
+};
+
 export const createNewProject = async (
   projectData: Partial<Prisma.ProjectCreateInput>
 ) => {
@@ -61,6 +69,5 @@ export const createNewProject = async (
     url: 'api/project',
     method: 'POST',
     body: projectData,
-    json: true,
   });
 };

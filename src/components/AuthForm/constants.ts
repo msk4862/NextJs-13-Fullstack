@@ -8,7 +8,7 @@ export const RegisterContent = {
   linkText: 'Already have an account?',
   header: 'Create a new Account',
   subheader: 'Just a few things to get started',
-  buttonText: 'Register',
+  buttonText: 'Create new account',
 };
 
 export const SigninContent = {

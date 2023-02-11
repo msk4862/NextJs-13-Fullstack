@@ -1,24 +1,26 @@
-import { cookies } from 'next/headers';
-
 import { Button } from '@components/Button';
 import { Card } from '@components/Card';
-import { getUserDetails } from '@lib/server_side_data_fetching/user_data';
+import { Logout } from './Logout';
 
 export const Greeting = async () => {
-  const user = await getUserDetails();
+  // const user = await getUserDetails();
 
   return (
-    <Card className='w-full py-4 relative'>
-      <div className='mb-4'>
+    <Card className='w-full py-4 flex flex justify-between'>
+      <div className='mb-2'>
         <h1 className='text-3xl text-gray-700 font-bold mb-4'>
-          Hello, {user?.firstName}!
+          {/* Hello, {user?.firstName}! */}
+          hello
         </h1>
         <h4 className='text-xl text-gray-400'>
           Check your daily tasks and schedule
         </h4>
+        <div className='mt-4'>
+          <Button size='lg'>Today&apos;s Schedule</Button>
+        </div>
       </div>
       <div>
-        <Button size='lg'>Today&apos;s Schedule</Button>
+        <Logout />
       </div>
     </Card>
   );
