@@ -5,7 +5,7 @@ import {
   ProjectList,
   ProjectListLoader,
   CreateProject,
-} from '@components/Project';
+} from '@components/ProjectCard';
 import { TaskCard } from '@components/TaskCard';
 
 export default function Page() {
