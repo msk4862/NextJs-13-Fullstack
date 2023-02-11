@@ -1,24 +1,10 @@
 import { Loader } from 'react-feather';
 import { Suspense } from 'react';
-import { cookies } from 'next/headers';
 import Link from 'next/link';
 
-import { getUserFromCookie } from '@lib/auth';
-import { db } from '@lib/db';
-import { delay } from '@lib/utils';
 import { ProjectCard } from './ProjectCard';
 import { ProjectCardSkeleten } from './ProjectCardSkeleten';
-
-const getProjectIds = async () => {
-  await delay(2000);
-  const user = await getUserFromCookie(cookies());
-  const projects = await db.project.findMany({
-    where: { ownerId: user?.id },
-    select: { id: true },
-  });
-
-  return projects;
-};
+import { getProjectIds } from '@lib/server_side_data_fetching/project_data';
 
 export const ProjectList = async () => {
   const projectIds = await getProjectIds();

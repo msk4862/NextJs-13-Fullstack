@@ -2,16 +2,7 @@ import { cookies } from 'next/headers';
 
 import { Button } from '@components/Button';
 import { Card } from '@components/Card';
-import { delay } from '@lib/utils';
-import { getUserFromCookie } from '@lib/auth';
-
-const getUserDetails = async () => {
-  // adding fake delay
-  await delay(4000);
-
-  const user = await getUserFromCookie(cookies());
-  return user;
-};
+import { getUserDetails } from '@lib/server_side_data_fetching/user_data';
 
 export const Greeting = async () => {
   const user = await getUserDetails();
