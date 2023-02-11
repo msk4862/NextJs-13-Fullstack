@@ -1,2 +1,2 @@
-export { Greeting } from './Greeting'
-export { GreetingsSkeleton } from './GreetingSkeleton'
+export { Greeting } from './Greeting';
+export { GreetingsSkeleton } from './GreetingSkeleton';

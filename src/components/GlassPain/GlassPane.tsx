@@ -1,11 +1,11 @@
-import clsx from 'clsx'
-import { PropsWithChildren } from 'react'
+import clsx from 'clsx';
+import { PropsWithChildren } from 'react';
 
-import styles from './GlassPane.module.scss'
+import styles from './GlassPane.module.scss';
 
 type GlassPaneProps = {
-  className: string
-}
+  className: string;
+};
 
 export const GlassPane = ({
   children,
@@ -21,5 +21,5 @@ export const GlassPane = ({
     >
       {children}
     </div>
-  )
-}
+  );
+};

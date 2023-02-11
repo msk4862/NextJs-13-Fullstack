@@ -1,16 +1,16 @@
-import { Prisma } from '@prisma/client'
+import { Prisma } from '@prisma/client';
 
 type APIRequestBody =
   | Prisma.UserCreateInput
   | Prisma.UserWhereUniqueInput
-  | Partial<Prisma.ProjectCreateInput>
+  | Partial<Prisma.ProjectCreateInput>;
 
 type FetcherParams = {
-  url: string
-  method: 'POST' | 'GET'
-  body: APIRequestBody
-  json?: boolean
-}
+  url: string;
+  method: 'POST' | 'GET';
+  body: APIRequestBody;
+  json?: boolean;
+};
 
 export const fetcher = async ({
   url,
@@ -25,16 +25,16 @@ export const fetcher = async ({
       Accept: 'application/json',
       'Content-Type': 'application/json',
     },
-  })
+  });
 
   if (!res.ok) {
-    throw new Error('API Error')
+    throw new Error('API Error');
   }
 
   if (json) {
-    return res.json()
+    return res.json();
   }
-}
+};
 
 export const register = async (user: Prisma.UserCreateInput) => {
   return fetcher({
@@ -42,8 +42,8 @@ export const register = async (user: Prisma.UserCreateInput) => {
     method: 'POST',
     body: user,
     json: false,
-  })
-}
+  });
+};
 
 export const signin = async (user: Prisma.UserWhereUniqueInput) => {
   return fetcher({
@@ -51,8 +51,8 @@ export const signin = async (user: Prisma.UserWhereUniqueInput) => {
     method: 'POST',
     body: user,
     json: false,
-  })
-}
+  });
+};
 
 export const createNewProject = async (
   projectData: Partial<Prisma.ProjectCreateInput>
@@ -62,5 +62,5 @@ export const createNewProject = async (
     method: 'POST',
     body: projectData,
     json: true,
-  })
-}
+  });
+};

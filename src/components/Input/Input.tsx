@@ -1,9 +1,9 @@
-import clsx from 'clsx'
-import { InputHTMLAttributes } from 'react'
+import clsx from 'clsx';
+import { InputHTMLAttributes } from 'react';
 
 type InputProps = {
-  className?: string
-} & InputHTMLAttributes<HTMLInputElement>
+  className?: string;
+} & InputHTMLAttributes<HTMLInputElement>;
 
 export const Input = ({ className, ...props }: InputProps) => {
   return (
@@ -14,5 +14,5 @@ export const Input = ({ className, ...props }: InputProps) => {
       )}
       {...props}
     />
-  )
-}
+  );
+};

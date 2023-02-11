@@ -1,8 +1,8 @@
 export const delay = (waitTime: number) => {
   return new Promise((resolve) => {
-    setTimeout(() => resolve(true), waitTime)
-  })
-}
+    setTimeout(() => resolve(true), waitTime);
+  });
+};
 
 export const formatDate = (date: Date) =>
   new Date(date).toLocaleDateString('en-us', {
@@ -10,4 +10,4 @@ export const formatDate = (date: Date) =>
     year: 'numeric',
     month: 'short',
     day: 'numeric',
-  })
+  });

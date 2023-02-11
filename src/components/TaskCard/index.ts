@@ -1,1 +1,1 @@
-export { TaskCard } from './TaskCard'
+export { TaskCard } from './TaskCard';

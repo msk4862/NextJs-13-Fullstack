@@ -1,14 +1,14 @@
-import clsx from 'clsx'
-import { AlertCircle } from 'react-feather'
+import clsx from 'clsx';
+import { AlertCircle } from 'react-feather';
 
 type ErrorLabel = {
-  className?: string
-  label: string
-}
+  className?: string;
+  label: string;
+};
 
 export const ErrorLabel = ({ className, label }: ErrorLabel) => {
   if (!label) {
-    return null
+    return null;
   }
 
   return (
@@ -18,8 +18,8 @@ export const ErrorLabel = ({ className, label }: ErrorLabel) => {
         className
       )}
     >
-      <AlertCircle size="15" />
-      <label className="ml-1">{label}</label>
+      <AlertCircle size='15' />
+      <label className='ml-1'>{label}</label>
     </div>
-  )
-}
+  );
+};

@@ -1,1 +1,1 @@
-export { GlassPane } from './GlassPane'
+export { GlassPane } from './GlassPane';

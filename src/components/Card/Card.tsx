@@ -1,9 +1,9 @@
-import clsx from 'clsx'
-import { PropsWithChildren } from 'react'
+import clsx from 'clsx';
+import { PropsWithChildren } from 'react';
 
 type CardProps = {
-  className?: string
-}
+  className?: string;
+};
 
 export const Card = ({ className, children }: PropsWithChildren<CardProps>) => {
   return (
@@ -15,5 +15,5 @@ export const Card = ({ className, children }: PropsWithChildren<CardProps>) => {
     >
       {children}
     </div>
-  )
-}
+  );
+};

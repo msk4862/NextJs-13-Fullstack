@@ -1,7 +1,7 @@
 export const AuthFormModes = {
   register: 'register',
   signin: 'signin',
-}
+};
 
 export const RegisterContent = {
   linkUrl: '/signin',
@@ -9,7 +9,7 @@ export const RegisterContent = {
   header: 'Create a new Account',
   subheader: 'Just a few things to get started',
   buttonText: 'Register',
-}
+};
 
 export const SigninContent = {
   linkUrl: '/register',
@@ -17,6 +17,6 @@ export const SigninContent = {
   header: 'Welcome Back',
   subheader: 'Enter your credentials to access your account',
   buttonText: 'Sign In',
-}
+};
 
-export const EmailRegex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i
+export const EmailRegex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i;

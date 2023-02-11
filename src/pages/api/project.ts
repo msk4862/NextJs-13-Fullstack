@@ -1,16 +1,16 @@
-import { validateJWT } from '@lib/auth'
-import { db } from '@lib/db'
-import { NextApiRequest, NextApiResponse } from 'next'
+import { validateJWT } from '@lib/auth';
+import { db } from '@lib/db';
+import { NextApiRequest, NextApiResponse } from 'next';
 
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  const cookieName = process.env.COOKIE_NAME ?? ''
-  const user = await validateJWT(req.cookies[cookieName] || '')
+  const cookieName = process.env.COOKIE_NAME ?? '';
+  const user = await validateJWT(req.cookies[cookieName] || '');
 
   if (!user) {
-    res.status(400).json({ status: false })
+    res.status(400).json({ status: false });
   }
 
   await db.project.create({
@@ -18,7 +18,7 @@ export default async function handler(
       name: req.body.name,
       ownerId: user.id,
     },
-  })
+  });
 
-  res.json({ data: { message: 'ok' } })
+  res.json({ data: { message: 'ok' } });
 }
