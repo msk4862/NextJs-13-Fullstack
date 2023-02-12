@@ -1,6 +1,6 @@
 An example for people who are trying to develop a full-stack application using **NextJs v13** with `app` directory.
 
-A web app for tracking different projects and its tasks. (🚧 WIP...) 
+A web app for tracking different projects and its tasks. 🚧 WIP...
 
 Auth Page             |  Home Page
 :-------------------------:|:-------------------------:
