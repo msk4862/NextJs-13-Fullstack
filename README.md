@@ -1,8 +1,10 @@
 An example for people who are trying to develop a full-stack application using **NextJs v13** with `app` directory.
 
-A web app for tracking different projects and its tasks.
+A web app for tracking different projects and its tasks. (🚧 WIP...) 
 
-<img width="500" alt="Screenshot 2023-02-12 at 4 21 01 PM" src="https://user-images.githubusercontent.com/24875366/218306646-0702f9e7-70c0-4280-bb1a-9cfc648bf2e3.png"> <img width="500" alt="218309185-00cd64c9-2c40-472f-b5f9-39421178714a" src="https://user-images.githubusercontent.com/24875366/218311501-ca8b0d32-a27a-48a7-8f41-d6b8f948fc04.png">
+Auth Page             |  Home Page
+:-------------------------:|:-------------------------:
+![Auth page](https://user-images.githubusercontent.com/24875366/218306646-0702f9e7-70c0-4280-bb1a-9cfc648bf2e3.png)  |  ![Home Page](https://user-images.githubusercontent.com/24875366/218311501-ca8b0d32-a27a-48a7-8f41-d6b8f948fc04.png)
 
 
 
@@ -28,7 +30,7 @@ Seed DB with test data (optional):
 npx prisma db seed
 ```
 
-Start development server:
+### Start development server:
 
 ```bash
 npm run dev
