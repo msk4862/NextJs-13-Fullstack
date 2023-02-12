@@ -3,6 +3,7 @@
 import { ChangeEvent, FormEvent, useCallback } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
+import { Loader } from 'react-feather';
 
 import { Button } from '@components/Button';
 import { Card } from '@components/Card';
@@ -34,21 +35,19 @@ export const AuthForm = ({ mode }: AuthFormProps) => {
   const handleSubmit = useCallback(
     async (e: FormEvent<HTMLFormElement>) => {
       e.preventDefault();
+      setFormError({ loading: true });
 
       try {
         if (isFormDataValid()) {
-          if (isRegisterMode) {
-            await register(formState);
-          } else {
-            await signin(formState);
-          }
+          const sendRequest = isRegisterMode ? register : signin;
+          await sendRequest(formState);
+          router.replace('/home');
         }
-
-        router.replace('/home');
       } catch (e) {
         console.error(e);
         setFormError({ generic: `Could not ${mode}` });
       } finally {
+        setFormError({ loading: false });
       }
     },
     [isFormDataValid, formState, isRegisterMode, mode, setFormError, router]
@@ -68,7 +67,8 @@ export const AuthForm = ({ mode }: AuthFormProps) => {
           <h2 className='text-3xl mb-2'>{content.header}</h2>
           <p className='tex-lg text-black/25'>{content.subheader}</p>
           <ErrorLabel
-            className='justify-center text-base ml-0'
+            className='justify-center ml-0'
+            size='base'
             label={formError.generic}
           />
         </div>
@@ -136,8 +136,15 @@ export const AuthForm = ({ mode }: AuthFormProps) => {
               </span>
             </div>
             <div>
-              <Button type='submit' variant='secondary'>
-                {content.buttonText}
+              <Button
+                type='submit'
+                variant='secondary'
+                disabled={formError.loading}
+              >
+                <div className='flex items-center gap-1'>
+                  {formError.loading && <Loader className='animate-spin' />}
+                  {content.buttonText}
+                </div>
               </Button>
             </div>
           </div>

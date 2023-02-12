@@ -4,9 +4,10 @@ import { AlertCircle } from 'react-feather';
 type ErrorLabel = {
   className?: string;
   label: string;
+  size?: 'xs' | 'sm' | 'base';
 };
 
-export const ErrorLabel = ({ className, label }: ErrorLabel) => {
+export const ErrorLabel = ({ className, label, size = 'xs' }: ErrorLabel) => {
   if (!label) {
     return null;
   }
@@ -14,7 +15,8 @@ export const ErrorLabel = ({ className, label }: ErrorLabel) => {
   return (
     <div
       className={clsx(
-        'flex items-center text-xs text-red-500 ml-2 mt-2',
+        'flex items-center text-red-500 ml-2 mt-2',
+        `text-${size}`,
         className
       )}
     >

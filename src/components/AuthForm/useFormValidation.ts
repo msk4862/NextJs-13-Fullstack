@@ -3,7 +3,7 @@ import { useCallback, useReducer } from 'react';
 import { formDataIntialState, FormState } from './useAuthFormReducer';
 import { EmailRegex } from './constants';
 
-type FormErrorState = FormState & { generic: string };
+type FormErrorState = FormState & { generic: string; loading?: boolean };
 
 const formErrorinitialState: FormErrorState = {
   ...formDataIntialState,
@@ -29,8 +29,12 @@ export const useFormValidation = (
     formErrorinitialState
   );
 
+  const resetErrors = () => {
+    setFormError({ ...formErrorinitialState });
+  };
+
   const isFormDataValid = useCallback(() => {
-    setFormError(formErrorinitialState);
+    resetErrors();
 
     const { firstName, lastName, email, password } = formState;
     let isValid = true;
