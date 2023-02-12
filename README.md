@@ -10,7 +10,19 @@ This can be an example for people who are trying to develop a full-stack applica
 ## Getting Started
 > Create .env file and add environment variables (see .env.example for reference)
 
-First, run the development server:
+### Databse setup
+
+DB migration:
+```bash
+npx prisma migrate dev 
+```
+
+Seed DB with test data (optional):
+```bash
+npx prisma db seed
+```
+
+Start development server:
 
 ```bash
 npm run dev
