@@ -19,7 +19,7 @@ export const ProjectCard = async ({ projectId }: { projectId: string }) => {
   const progress = Math.ceil((completedCount / project.tasks.length) * 100);
 
   return (
-    <Card className='!px-6 !py-8 hover:scale-105 transition-all ease-in-out duration-200'>
+    <Card className='!px-6 !py-8 hover:scale-105 hover:drop-shadow-2xl transition-all ease-in-out duration-200'>
       <div>
         <span className='text-sm text-gray-300'>
           {formatDate(project.createdAt)}

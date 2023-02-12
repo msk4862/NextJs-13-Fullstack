@@ -1,13 +1,15 @@
+import Image from 'next/image';
 import { Button } from '@components/Button';
 import { Card } from '@components/Card';
 import { Logout } from './Logout';
 import { getUserDetails } from '@lib/server_side_data_fetching/user_data';
+import userImage from '@assets/images/user.png';
 
 export const Greeting = async () => {
   const user = await getUserDetails();
 
   return (
-    <Card className='w-full py-4 flex flex justify-between'>
+    <Card className='w-full py-4 relative'>
       <div className='mb-2'>
         <h1 className='text-3xl text-gray-700 font-bold mb-4'>
           Hello, {user?.firstName}!
@@ -19,9 +21,15 @@ export const Greeting = async () => {
           <Button size='lg'>Today&apos;s Schedule</Button>
         </div>
       </div>
-      <div>
+      <div className='absolute top-5 right-5'>
         <Logout />
       </div>
+      <Image
+        className='absolute animate-[bounce_2000ms_infinite_ease-in-out] top-10 right-20 z-10'
+        src={userImage}
+        alt='user image'
+        width='120'
+      />
     </Card>
   );
 };

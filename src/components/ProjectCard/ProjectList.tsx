@@ -25,7 +25,7 @@ export const ProjectList = async () => {
 
 export const ProjectListLoader = () => {
   return (
-    <div className='w-full h-full flex justify-center mt-5'>
+    <div className='w-full h-full flex justify-center col-span-full mt-5'>
       <Loader size='40' className='animate-spin duration-1000' />
     </div>
   );

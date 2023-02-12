@@ -22,10 +22,10 @@ export default function Page() {
           <Suspense fallback={<ProjectListLoader />}>
             {/* @ts-expect-error */}
             <ProjectList />
+            <div className='p-3'>
+              <CreateProject />
+            </div>
           </Suspense>
-          <div className='p-3'>
-            <CreateProject />
-          </div>
         </div>
         <div className='mt-6 flex-2 grow w-full flex'>
           <div className='w-full'>

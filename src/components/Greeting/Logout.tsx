@@ -15,11 +15,10 @@ export const Logout = () => {
   }, [router]);
 
   return (
-    <Button type='submit' variant='secondary' onClick={onClick}>
-      <div className='flex items-center gap-2'>
-        Sign out
+    <div className='flex items-center gap-2'>
+      <Button type='submit' variant='text' onClick={onClick}>
         <LogOut size='20' />
-      </div>
-    </Button>
+      </Button>
+    </div>
   );
 };
