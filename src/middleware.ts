@@ -27,11 +27,12 @@ export default async function middleware(req: NextRequest) {
     PUBLIC_FILE.test(pathname)
   ) {
     return NextResponse.next();
+  } else if (pathname === '/') {
+    req.nextUrl.pathname = '/home';
+    return NextResponse.redirect(req.nextUrl);
   }
   // Check if already signed in
   else if (pathname.startsWith('/signin') || pathname.startsWith('/register')) {
-    console.log('asas');
-
     const jwt = req.cookies.get(JWT_COOKIE_NAME);
     if (!jwt) {
       return NextResponse.next();
