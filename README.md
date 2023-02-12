@@ -1,4 +1,12 @@
-This can be an example for people who are trying to develop a full-stack application using NextJs v13 with `app` directory.
+An example for people who are trying to develop a full-stack application using **NextJs v13** with `app` directory.
+
+A web app for tracking different projects and its tasks. (🚧 WIP...) 
+
+Auth Page             |  Home Page
+:-------------------------:|:-------------------------:
+![Auth page](https://user-images.githubusercontent.com/24875366/218306646-0702f9e7-70c0-4280-bb1a-9cfc648bf2e3.png)  |  ![Home Page](https://user-images.githubusercontent.com/24875366/218311501-ca8b0d32-a27a-48a7-8f41-d6b8f948fc04.png)
+
+
 
 ### Tech used:
 - [NextJs](https://beta.nextjs.org/docs)
@@ -22,7 +30,7 @@ Seed DB with test data (optional):
 npx prisma db seed
 ```
 
-Start development server:
+### Start development server:
 
 ```bash
 npm run dev
@@ -34,9 +42,7 @@ pnpm dev
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/*](http://localhost:3000/api/*). These endpoints can be edited in `pages/api/*.ts`.
 
 The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
 
