@@ -1,4 +1,4 @@
-An example for people who are trying to develop a full-stack application using **NextJs v13** with `app` directory.
+An example full-stack application using **NextJs v13** with [app](https://beta.nextjs.org/docs) *(beta)* directory.
 
 A web app for tracking different projects and its tasks. 🚧 WIP...
 
